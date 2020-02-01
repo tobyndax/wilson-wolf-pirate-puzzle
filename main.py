@@ -18,10 +18,8 @@ LETTERS = [
 def getLetter(position):
   return LETTERS[position.y][position.x]
 
-class Movement():
-  def __init__(self, delta_x, delta_y):
-    self.delta_x = delta_x
-    self.delta_x = delta_y
+import collections
+Movement = collections.namedtuple('Movement', 'delta_x delta_y')
 
 START_MOVEMENTS = [
   Movement(0, -1),
@@ -84,6 +82,7 @@ class Instruction():
   def __str__(self):
     return f"<Instruction n={self.n} hand={self.hand} is_start={self.is_start}>"
 
+
 def ST(n): return Instruction(n, is_start=True) # move n in start direction
 def L(n): return Instruction(n, hand=LEFT_HAND) # move n in left signal direction
 def R(n): return Instruction(n, hand=RIGHT_HAND) # move n in right signal direction
@@ -116,6 +115,8 @@ class Position():
     self.x += movement.delta_y
 
 assert(getLetter(Position(2,1)) == 'V')
+assert(Instruction(1,LEFT_HAND).getMovement(1, Position(1,2)) == Movement(-1,0))
+
 
 STARTPOS0 = Position(2, 12)
 STARTPOS1 = Position(-1, 2)
@@ -135,9 +136,11 @@ class Player():
     self.position = position
 
   def move(self, instruction):
-    pass
-    # TODO
+    movement = instruction.getMovement(self.player_i, self.position)
+    self.position.move(movement)
 
+  def __str__(self):
+    return f"<Player {self.player_i} position={self.position}>"
 
 class State():
   def __init__(self):
