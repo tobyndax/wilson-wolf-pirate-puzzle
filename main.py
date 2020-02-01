@@ -264,6 +264,7 @@ def main():
             break
         if player.isStuck():
           break
+    print("Positions at end of round:")
     print(state)
 
 
