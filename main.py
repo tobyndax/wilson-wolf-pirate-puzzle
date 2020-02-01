@@ -255,11 +255,12 @@ def main():
     state = State()
     for player_i, player in enumerate(state.players):
       player_instructions = gameround[player_i]
-      for instruction in player_instructions:
+      for instruction_i, instruction in enumerate(player_instructions):
         movement = instruction.getMovement(player_i, player.position)
-        for _ in range(instruction.n):
+        for step_i in range(instruction.n):
           player.move(movement)
           if player.isStuck():
+            print(f"Player {player_i} stuck after instruction {instruction_i}, {step_i+1} steps")
             break
         if player.isStuck():
           break
