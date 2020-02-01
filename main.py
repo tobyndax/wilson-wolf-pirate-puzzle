@@ -16,6 +16,7 @@ LETTERS = [
 ]
 
 def getLetter(position):
+  print(position)
   return LETTERS[position.y][position.x]
 
 import collections
@@ -122,7 +123,6 @@ STARTPOS0 = Position(2, 12)
 STARTPOS1 = Position(-1, 2)
 STARTPOS2 = Position(9, -1)
 STARTPOS3 = Position(12, 9)
-
 
 
 ROUNDS = [
