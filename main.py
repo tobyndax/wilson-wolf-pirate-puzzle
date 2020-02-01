@@ -15,6 +15,9 @@ LETTERS = [
   "PXILQACENTRE",
 ]
 
+def getLetter(position):
+  return LETTERS[position.y][position.x]
+
 class Movement():
   def __init__(self, delta_x, delta_y):
     self.delta_x = delta_x
@@ -27,13 +30,63 @@ START_MOVEMENTS = [
   Movement(-1, 0),
 ]
 
-class Instruction():
-  def __init__(self):
-    pass
+N =  Movement( 0, -1)
+NE = Movement( 1, -1)
+E =  Movement( 1,  0)
+SE = Movement( 1,  1)
+S =  Movement( 0,  1)
+SW = Movement(-1,  1)
+W =  Movement(-1,  0)
+NW = Movement(-1, -1)
 
-def ST(n): return f"ST{n}" # move n in start direction
-def L(n): return f"L{n}" # move n in left signal direction
-def R(n): return f"R{n}" # move n in right signal direction
+FLAGS = {
+  'A': (SW, S),
+  'B': (W,  S),
+  'C': (NW, S),
+  'D': (N,  S),
+  'E': (S, NE),
+  'F': (S, E),
+  'G': (S, SE),
+  'H': (W, SW),
+  'I': (SW,NW),
+  'J': (N,  E),
+  'K': (SW, N),
+  'L': (SW,NE),
+  'M': (SW, E),
+  'N': (SW,SE),
+  'O': (W, NW),
+  'P': (W,  N),
+  'Q': (W, NE),
+  'R': (W,  E),
+  'S': (W, SE),
+  'T': (NW, N),
+  'U': (NW,NE),
+  'V': (N, SE),
+  'W': (NE, E),
+  'X': (NE,SE),
+  'Y': (NW, E),
+  'Z': (SE, E),
+}
+LEFT_HAND = 0
+RIGHT_HAND = 1
+
+class Instruction():
+  def __init__(self, n, hand=None, is_start=False):
+    self.n = n
+    self.hand = hand
+    self.is_start = is_start
+
+  def getMovement(self, player_i, currentPosition):
+    if self.is_start:
+      return START_MOVEMENTS[player_i]
+    return FLAGS[getLetter(currentPosition)][self.hand]
+
+  def __str__(self):
+    return f"<Instruction n={self.n} hand={self.hand} is_start={self.is_start}>"
+
+def ST(n): return Instruction(n, is_start=True) # move n in start direction
+def L(n): return Instruction(n, hand=LEFT_HAND) # move n in left signal direction
+def R(n): return Instruction(n, hand=RIGHT_HAND) # move n in right signal direction
 
 ST1 = ST(1)
 ST2 = ST(2)
@@ -62,6 +115,8 @@ class Position():
     self.x += movement.delta_y
     self.x += movement.delta_y
 
+assert(getLetter(Position(2,1)) == 'V')
+
 STARTPOS0 = Position(2, 12)
 STARTPOS1 = Position(-1, 2)
 STARTPOS2 = Position(9, -1)
@@ -75,16 +130,22 @@ ROUNDS = [
 ]
 
 class Player():
-  def __init__(self, position):
+  def __init__(self, player_i, position):
+    self.player_i = player_i
     self.position = position
+
+  def move(self, instruction):
+    pass
+    # TODO
+
 
 class State():
   def __init__(self):
     self.players = [
-      Player(STARTPOS0),
-      Player(STARTPOS1),
-      Player(STARTPOS2),
-      Player(STARTPOS3),
+      Player(0, STARTPOS0),
+      Player(1, STARTPOS1),
+      Player(2, STARTPOS2),
+      Player(3, STARTPOS3),
     ]
     self.gameround = 0
 
@@ -109,7 +170,7 @@ def main():
       player_instructions = gameround[player_i]
       for instruction in player_instructions:
         print(instruction)
-        #player.position.move()
+        player.move(instruction)
 
 
 if __name__ == '__main__':
