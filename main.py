@@ -17,7 +17,6 @@ LETTERS = [
 
 
 def getLetter(position):
-  print(position)
   return LETTERS[position.y][position.x]
 
 LAND_MAP = [
@@ -98,7 +97,6 @@ class Instruction():
     if self.is_start:
       return START_MOVEMENTS[player_i]
     letter = getLetter(currentPosition)
-    print (player_i, "Standing on letter", letter)
     return FLAGS[letter][self.hand]
 
   def __str__(self):
@@ -204,9 +202,7 @@ class Player():
     self.position = position
 
   def move(self, movement):
-    print(f"Move player {self}: {movement}")
     self.position = self.position.move(movement)
-    print(f"            {self}: {movement}")
 
   def isStuck(self):
     return isLand(self.position)
@@ -239,7 +235,6 @@ class State():
     return s
 
 def main():
-  print("Hello")
   # Algorithm:
   # for each round:
   # mark players as free to move
@@ -255,10 +250,7 @@ def main():
   for round_i, gameround in enumerate(ROUNDS):
     print("Round (1-indexed)", round_i + 1)
     state = State()
-    print(state)
     for player_i, player in enumerate(state.players):
-      print(player_i, player)
-      print(state)
       player_instructions = gameround[player_i]
       for instruction in player_instructions:
         print(instruction)
