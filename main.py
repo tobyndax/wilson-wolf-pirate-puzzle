@@ -232,6 +232,9 @@ class State():
       for cell in row:
         s += cell
       s += "\n"
+    for player in self.players:
+      if player.isStuck():
+        s += f"Player {player.player_i} is stuck\n"
     return s
 
 def main():
@@ -253,7 +256,6 @@ def main():
     for player_i, player in enumerate(state.players):
       player_instructions = gameround[player_i]
       for instruction in player_instructions:
-        print(instruction)
         movement = instruction.getMovement(player_i, player.position)
         for _ in range(instruction.n):
           player.move(movement)
