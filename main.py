@@ -126,6 +126,7 @@ R3 = R(3)
 R4 = R(4)
 R5 = R(5)
 R6 = R(6)
+R7 = R(7)
 
 
 class Position():
@@ -158,7 +159,7 @@ ROUNDS = [
   #2
   [ [ST5,L2], [ST6,L2,L5,R5,R1,], [ST4,], [ST9,R4,L1,]],
   #3
-  [ [ST2,R1,R2,L2,R3,R2,R1], [ST,6,R1,R3,R1], [ST1,L1,R5], [ST1,R1,]],
+  [ [ST2,R1,R2,L2,R3,R2,R1], [ST6,R1,R3,R1], [ST1,L1,R5], [ST1,R1,]],
   #4
   [ [ST2,R3,R2], [ST9,L4,], [ST2,R2,R2,L3,L3], [ST5,L1]],
   #5
@@ -166,21 +167,25 @@ ROUNDS = [
   #6
   [ [ST2,R1,R4,L1], [ST1,R3,R1,], [ST1,L3,L1,L2,L1,], [ST8,L2,R1,]],
   #7
-  [ [ST], [ST], [ST], [ST]],
+  [ [ST2,R3,R2], [ST1,R6,R7], [ST1,L1,R5], [ST2,R1,L1]],
   #8
-  [ [ST], [ST], [ST], [ST]],
+  [ [ST2,R1,R3,R3,R3,R3,L1], [ST1,R6,R7], [ST1,L3,R4,R1], [ST3,R5,L1,R3]],
   #9
-  [ [ST], [ST], [ST], [ST]],
+  [ [ST4,R5], [ST6,R1,R4,R1], [ST1,L4,R2], [ST3,R3,L1]],
   #10
-  [ [ST], [ST], [ST], [ST]],
+  [ [ST2,R3,R2], [ST3,L1], [ST1,L1,R5], [ST6,L1]],
   #11
-  [ [ST], [ST], [ST], [ST]],
+  [ [ST2,R3,L2,L2], [ST2,R1,R3,R1,L3,R4], [ST1,L1,R3,R3,L1,L2,L1], [ST3,L3,L1]],
   #12
-  [ [ST], [ST], [ST], [ST]],
+  [ [ST2,R3,R2], [ST2,R1,R5,L1,L2,R2], [ST4], [ST3,R3,L1]],
   #13
+  [ [ST4,R5], [ST5,R2,R3,R4,L3,L3], [ST1,L1,R5], [ST8,R2,R1]],
   [ [ST], [ST], [ST], [ST]],
-
-  #[ [ST], [ST], [ST], [ST]],
+  [ [ST], [ST], [ST], [ST]],
+  [ [ST], [ST], [ST], [ST]],
+  [ [ST], [ST], [ST], [ST]],
+  [ [ST], [ST], [ST], [ST]],
+  #
 ]
 
 class Player():
