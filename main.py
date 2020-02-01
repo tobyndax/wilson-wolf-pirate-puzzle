@@ -97,7 +97,9 @@ class Instruction():
   def getMovement(self, player_i, currentPosition):
     if self.is_start:
       return START_MOVEMENTS[player_i]
-    return FLAGS[getLetter(currentPosition)][self.hand]
+    letter = getLetter(currentPosition)
+    print (player_i, "Standing on letter", letter)
+    return FLAGS[letter][self.hand]
 
   def __str__(self):
     return f"<Instruction n={self.n} hand={self.hand} is_start={self.is_start}>"
@@ -137,8 +139,9 @@ class Position():
     self.y = y
 
   def move(self, movement):
-    self.x += movement.delta_x
-    self.y += movement.delta_y
+    return Position(
+      self.x + movement.delta_x,
+      self.y + movement.delta_y)
 
   def __str__(self):
     return f"<Position x={self.x} y={self.y}>"
@@ -202,7 +205,7 @@ class Player():
 
   def move(self, movement):
     print(f"Move player {self}: {movement}")
-    self.position.move(movement)
+    self.position = self.position.move(movement)
     print(f"            {self}: {movement}")
 
   def isStuck(self):
@@ -224,7 +227,10 @@ class State():
   def __str__(self):
     gamemap = [['.' for c in range(12)] for r in range(12)]
     for player_i, player in enumerate(self.players):
-      gamemap[player.position.y][player.position.x] = str(player_i)
+      x = player.position.x
+      y = player.position.y
+      if x >= 0 and x < 12 and y >= 0 and y < 12:
+        gamemap[y][x] = str(player_i)
     s = ""
     for row in gamemap:
       for cell in row:
@@ -246,10 +252,13 @@ def main():
   # move one step
   # if jagged rocks or island:
   # mark as stuck until next round and stop moving
-  for gameround in ROUNDS:
+  for round_i, gameround in enumerate(ROUNDS):
+    print("Round (1-indexed)", round_i + 1)
     state = State()
+    print(state)
     for player_i, player in enumerate(state.players):
       print(player_i, player)
+      print(state)
       player_instructions = gameround[player_i]
       for instruction in player_instructions:
         print(instruction)
