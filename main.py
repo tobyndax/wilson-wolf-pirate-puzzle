@@ -112,6 +112,9 @@ ST2 = ST(2)
 ST3 = ST(3)
 ST4 = ST(4)
 ST5 = ST(5)
+ST6 = ST(6)
+ST9 = ST(9)
+ST8 = ST(8)
 L1 = L(1)
 L2 = L(2)
 L3 = L(3)
@@ -150,8 +153,34 @@ STARTPOS3 = Position(12, 9)
 
 
 ROUNDS = [
+  #1
   [ [ST2,L2,R5], [ST4,L5,L1,R5], [ST1,R1,L2, L3, L5, R2, R2], [ST3, R3, R1, L3, L3,]],
-  #[ [S0,], [S1,], [S2,], [S3,]],
+  #2
+  [ [ST5,L2], [ST6,L2,L5,R5,R1,], [ST4,], [ST9,R4,L1,]],
+  #3
+  [ [ST2,R1,R2,L2,R3,R2,R1], [ST,6,R1,R3,R1], [ST1,L1,R5], [ST1,R1,]],
+  #4
+  [ [ST2,R3,R2], [ST9,L4,], [ST2,R2,R2,L3,L3], [ST5,L1]],
+  #5
+  [ [ST4,R3,R1,R2,R1,R2], [ST5,R5,R3,], [ST1,L1,R5,], [ST3,R3,L1,]],
+  #6
+  [ [ST2,R1,R4,L1], [ST1,R3,R1,], [ST1,L3,L1,L2,L1,], [ST8,L2,R1,]],
+  #7
+  [ [ST], [ST], [ST], [ST]],
+  #8
+  [ [ST], [ST], [ST], [ST]],
+  #9
+  [ [ST], [ST], [ST], [ST]],
+  #10
+  [ [ST], [ST], [ST], [ST]],
+  #11
+  [ [ST], [ST], [ST], [ST]],
+  #12
+  [ [ST], [ST], [ST], [ST]],
+  #13
+  [ [ST], [ST], [ST], [ST]],
+
+  #[ [ST], [ST], [ST], [ST]],
 ]
 
 class Player():
