@@ -191,7 +191,6 @@ class State():
       s += "\n"
     return s
 
-
 def main():
   print("Hello")
   # Algorithm:
