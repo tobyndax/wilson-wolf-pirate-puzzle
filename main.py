@@ -165,7 +165,7 @@ class Player():
     print(f"            {self}: {movement}")
 
   def isStuck(self):
-    return isLand(position)
+    return isLand(self.position)
 
   def __str__(self):
     return f"<Player {self.player_i} position={self.position}>"
@@ -179,6 +179,18 @@ class State():
       Player(3, STARTPOS3),
     ]
     self.gameround = 0
+
+  def __str__(self):
+    gamemap = [['.' for c in range(12)] for r in range(12)]
+    for player_i, player in enumerate(self.players):
+      gamemap[player.position.y][player.position.x] = str(player_i)
+    s = ""
+    for row in gamemap:
+      for cell in row:
+        s += cell
+      s += "\n"
+    return s
+
 
 def main():
   print("Hello")
@@ -202,8 +214,13 @@ def main():
       for instruction in player_instructions:
         print(instruction)
         movement = instruction.getMovement(player_i, player.position)
-        for step_i in range(instruction.n):
+        for _ in range(instruction.n):
           player.move(movement)
+          if player.isStuck():
+            break
+        if player.isStuck():
+          break
+    print(state)
 
 
 if __name__ == '__main__':
