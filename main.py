@@ -113,13 +113,15 @@ ST3 = ST(3)
 ST4 = ST(4)
 ST5 = ST(5)
 ST6 = ST(6)
-ST9 = ST(9)
+ST7 = ST(7)
 ST8 = ST(8)
+ST9 = ST(9)
 L1 = L(1)
 L2 = L(2)
 L3 = L(3)
 L4 = L(4)
 L5 = L(5)
+L9 = L(9)
 R1 = R(1)
 R2 = R(2)
 R3 = R(3)
@@ -180,11 +182,16 @@ ROUNDS = [
   [ [ST2,R3,R2], [ST2,R1,R5,L1,L2,R2], [ST4], [ST3,R3,L1]],
   #13
   [ [ST4,R5], [ST5,R2,R3,R4,L3,L3], [ST1,L1,R5], [ST8,R2,R1]],
-  [ [ST], [ST], [ST], [ST]],
-  [ [ST], [ST], [ST], [ST]],
-  [ [ST], [ST], [ST], [ST]],
-  [ [ST], [ST], [ST], [ST]],
-  [ [ST], [ST], [ST], [ST]],
+  #14
+  [ [ST2,R5,R1,L1], [ST7,R5,R1], [ST1,L9], [ST5,L1]],
+  #15
+  [ [ST5,L1,L1,L1,R1], [ST1,R3,R1], [ST1,L5,L2], [ST6,R5,R1]],
+  #16
+  [ [ST6], [ST5,L1], [ST1,R2,L4,L2,L5,R5,R1], [ST8,L1,R3,R1]],
+  #17
+  [ [ST2,R1,R3,R4,R1,L1,L1], [ST7,R5,R1], [ST1,L1,R5], [ST3,R3,L1]],
+  #18
+  [ [ST2,R3,R2], [ST2,R1,R4,L1,L2,L1], [ST1,R1,L2,L3,L3,L3], [ST3,R3,L1]],
   #
 ]
 
