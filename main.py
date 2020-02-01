@@ -15,9 +15,28 @@ LETTERS = [
   "PXILQACENTRE",
 ]
 
+
 def getLetter(position):
   print(position)
   return LETTERS[position.y][position.x]
+
+LAND_MAP = [
+  ".......x....",
+  "...x........",
+  "............",
+  ".........x..",
+  ".##.........",
+  ".##.........",
+  ".##....##...",
+  ".......##...",
+  ".......##.x.",
+  "x...........",
+  ".....x......",
+  "............",
+]
+
+def isLand(position):
+  return LAND_MAP[position.y][position.x] != '.'
 
 import collections
 Movement = collections.namedtuple('Movement', 'delta_x delta_y')
@@ -112,10 +131,15 @@ class Position():
     self.y = y
 
   def move(self, movement):
-    self.x += movement.delta_y
-    self.x += movement.delta_y
+    self.x += movement.delta_x
+    self.y += movement.delta_y
+
+  def __str__(self):
+    return f"<Position x={self.x} y={self.y}>"
 
 assert(getLetter(Position(2,1)) == 'V')
+assert(not isLand(Position(2,1)))
+assert(isLand(Position(3,1)))
 assert(Instruction(1,LEFT_HAND).getMovement(1, Position(1,2)) == Movement(-1,0))
 
 
@@ -135,9 +159,13 @@ class Player():
     self.player_i = player_i
     self.position = position
 
-  def move(self, instruction):
-    movement = instruction.getMovement(self.player_i, self.position)
+  def move(self, movement):
+    print(f"Move player {self}: {movement}")
     self.position.move(movement)
+    print(f"            {self}: {movement}")
+
+  def isStuck(self):
+    return isLand(position)
 
   def __str__(self):
     return f"<Player {self.player_i} position={self.position}>"
@@ -173,7 +201,9 @@ def main():
       player_instructions = gameround[player_i]
       for instruction in player_instructions:
         print(instruction)
-        player.move(instruction)
+        movement = instruction.getMovement(player_i, player.position)
+        for step_i in range(instruction.n):
+          player.move(movement)
 
 
 if __name__ == '__main__':
