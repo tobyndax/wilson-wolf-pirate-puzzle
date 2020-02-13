@@ -35,7 +35,10 @@ LAND_MAP = [
 ]
 
 def isLand(position):
-  return LAND_MAP[position.y][position.x] != '.'
+  return LAND_MAP[position.y][position.x] == '#'
+
+def isJaggedRocks(position):
+  return LAND_MAP[position.y][position.x] == 'x'
 
 import collections
 Movement = collections.namedtuple('Movement', 'delta_x delta_y')
@@ -146,7 +149,8 @@ class Position():
 
 assert(getLetter(Position(2,1)) == 'V')
 assert(not isLand(Position(2,1)))
-assert(isLand(Position(3,1)))
+assert(isLand(Position(2,4)))
+assert(isJaggedRocks(Position(3,1)))
 assert(Instruction(1,LEFT_HAND).getMovement(1, Position(1,2)) == Movement(-1,0))
 
 
@@ -225,7 +229,7 @@ class State():
     for player_i, player in enumerate(self.players):
       x = player.position.x
       y = player.position.y
-      if x >= 0 and x < 12 and y >= 0 and y < 12:
+      if x >= 0 and x < 12 and y >= 0 and y < 12 and not isJaggedRocks(player.position):
         gamemap[y][x] = str(player_i)
     s = ""
     for row in gamemap:
